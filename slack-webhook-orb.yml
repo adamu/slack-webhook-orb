@@ -1,0 +1,140 @@
+version: 2.1
+
+description: A simple orb to send fully-customized Slack messages via Slack webhooks.
+
+display:
+  source_url: "https://github.com/adamu/slack-webhook-orb"
+
+commands:
+  send-message:
+    description: Send a message to slack via a webhook.
+    parameters:
+      json-payload:
+        type: string
+        description: The Slack JSON Payload.
+      webhook-url:
+        type: string
+        default: ''
+        description: The URL of the Slack webhook.
+      webhook-url-env-var:
+        type: string
+        default: SLACK_WEBHOOK
+        description: |
+          The name of the environment variable configured in CircleCI that contains the Slack webhook URL
+    steps:
+      - run:
+          name: Send a message to Slack via a webhook
+          command: |
+            # Put the json payload into a slack.json file to avoid interpeting it
+            cat > slack.json \<<'SLACK-PAYLOAD-4FC4D2195631E5-EOF'
+            << parameters.json-payload >>
+            SLACK-PAYLOAD-4FC4D2195631E5-EOF
+
+            # The directly-specified URL overrides the environment variable, if supplied
+            if [[ "<< parameters.webhook-url >>" ]]; then
+              << parameters.webhook-url-env-var >>=<< parameters.webhook-url >>
+            fi
+
+            if [[ -z "$<< parameters.webhook-url-env-var >>" ]]; then
+              1>&2 echo "Webhook URL is not defined.
+              Please supply webhook-url or webhook-url-env-var arguments to slack-webhook orb,
+              or set the SLACK_WEBHOOK environment vairable."
+              exit 1
+            fi
+
+            # Call the webhook
+            curl -H 'Content-type: application/json' --data-binary @slack.json $<< parameters.webhook-url-env-var >>
+
+examples:
+  webhook-url:
+    description: |
+      Provide the webhook URL directly in the webhook-url parameter.
+      Note that this leaks the Webhook URL in your CircleCI config and the CircleCI logs,
+      so using one of the environment variable option is preferred.
+      Provide the Slack JSON payload in the json-payload parameter.
+      The payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+    usage:
+      version: 2.1
+
+      orbs:
+        slack-webhook: adamu/slack-webhook@1.0.0
+
+      jobs:
+        build:
+          docker:
+            - image: cimg/base:stable
+          steps:
+            - slack-webhook/send-message:
+                webhook-url: https://hooks.slack.com/...
+                json-payload: |
+                  {
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
+                        }
+                      }
+                    ]
+                  }
+  environment-variable:
+    description: |
+      Provide the webhook URL in the SLACK_WEBHOOK environment variable on CircleCI.
+      When using this method, only the json-payload parameter needs to be supplied.
+      The payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+    usage:
+      version: 2.1
+
+      orbs:
+        slack-webhook: adamu/slack-webhook@1.0.0
+
+      jobs:
+        build:
+          docker:
+            - image: cimg/base:stable
+          steps:
+            - slack-webhook/send-message:
+                json-payload: |
+                  {
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
+                        }
+                      }
+                    ]
+                  }
+  custom-environment-variable:
+    description: |
+      Supply the webhook URL in a custom environment variable configured on CircleCI,
+      and provide the name of the environment variable in the webhook-url-env-var parameter.
+      Provide the Slack JSON payload in the json-payload parameter.
+      The payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+    usage:
+      version: 2.1
+
+      orbs:
+        slack-webhook: adamu/slack-webhook@1.0.0
+
+      jobs:
+        build:
+          docker:
+            - image: cimg/base:stable
+          steps:
+            - slack-webhook/send-message:
+                webhook-url-env-var: CUSTOM_SLACK_WEBHOOK_VARIABLE
+                json-payload: |
+                  {
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
+                        }
+                      }
+                    ]
+                  }
