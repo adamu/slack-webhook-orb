@@ -69,17 +69,17 @@ examples:
             - slack-webhook/send-message:
                 webhook-url: https://hooks.slack.com/...
                 json-payload: |
-                    {
-                      "blocks": [
-                        {
-                          "type": "section",
-                          "text": {
-                            "type": "mrkdwn",
-                            "text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
-                          }
-                        }
-                      ]
-                    }
+                  {
+                  	"blocks": [
+                  		{
+                  			"type": "section",
+                  			"text": {
+                  				"type": "mrkdwn",
+                  				"text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
+                  			}
+                  		}
+                  	]
+                  }
   environment-variable:
     description: |
       Provide the webhook URL in the SLACK_WEBHOOK environment variable on CircleCI.
@@ -98,17 +98,17 @@ examples:
           steps:
             - slack-webhook/send-message:
                 json-payload: |
-                    {
-                      "blocks": [
-                        {
-                          "type": "section",
-                          "text": {
-                            "type": "mrkdwn",
-                            "text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
-                          }
-                        }
-                      ]
-                    }
+                  {
+                  	"blocks": [
+                  		{
+                  			"type": "section",
+                  			"text": {
+                  				"type": "mrkdwn",
+                  				"text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
+                  			}
+                  		}
+                  	]
+                  }
   custom-environment-variable:
     description: |
       Supply the webhook URL in a custom environment variable configured on CircleCI,
@@ -129,14 +129,14 @@ examples:
             - slack-webhook/send-message:
                 webhook-url-env-var: CUSTOM_SLACK_WEBHOOK_VARIABLE
                 json-payload: |
-                    {
-                      "blocks": [
-                        {
-                          "type": "section",
-                          "text": {
-                            "type": "mrkdwn",
-                            "text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
-                          }
-                        }
-                      ]
-                    }
+                  {
+                  	"blocks": [
+                  		{
+                  			"type": "section",
+                  			"text": {
+                  				"type": "mrkdwn",
+                  				"text": "Hello from <https://github.com/adamu|@adamu>'s `slack-webhook` CircleCi orb! 👋"
+                  			}
+                  		}
+                  	]
+                  }
