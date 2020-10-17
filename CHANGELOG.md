@@ -11,4 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Initial Release
 
 
-[1.0.0]: https://github.com/adamu/slack-webhook-orb/releases/tag/0.0.1:w
+[0.0.1]: https://github.com/adamu/slack-webhook-orb/releases/tag/0.0.1
