@@ -2,7 +2,6 @@ version: 2.1
 
 description: |
   A simple orb to send fully-customized Slack messages via Slack webhooks.
-  To generate a webhook URL, please see the Slack instructions: https://api.slack.com/messaging/webhooks
 
 display:
   source_url: "https://github.com/adamu/slack-webhook-orb"
@@ -51,10 +50,14 @@ examples:
   webhook-url:
     description: |
       Provide the webhook URL directly in the webhook-url parameter.
-      Note that this leaks the Webhook URL in your CircleCI config and the CircleCI logs,
-      so using one of the environment variable option is preferred.
-      Provide the Slack JSON payload in the json-payload parameter.
-      The payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+
+      Note that this leaks the Webhook URL in your CircleCI config and the CircleCI logs - using one of the environment variable options below is recommended.
+
+      To generate a webhook URL, please see the Slack instructions: https://api.slack.com/messaging/webhooks
+      The json payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+
+      Unfortunately the json payload example below is reformatted by the CircleCI documentation generator. Please check the original in the Orb Source at the bottom of the page for an easier to read example.
+
     usage:
       version: 2.1
 
@@ -82,9 +85,13 @@ examples:
                   }
   environment-variable:
     description: |
-      Provide the webhook URL in the SLACK_WEBHOOK environment variable on CircleCI.
+      Set the webhook URL in the SLACK_WEBHOOK environment variable on CircleCI.
       When using this method, only the json-payload parameter needs to be supplied.
+
+      To generate a webhook URL, please see the Slack instructions: https://api.slack.com/messaging/webhooks
       The payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+
+      Unfortunately the json payload example below is reformatted by the CircleCI documentation generator. Please check the original in the Orb Source at the bottom of the page for an easier to read example.
     usage:
       version: 2.1
 
@@ -111,10 +118,12 @@ examples:
                   }
   custom-environment-variable:
     description: |
-      Supply the webhook URL in a custom environment variable configured on CircleCI,
-      and provide the name of the environment variable in the webhook-url-env-var parameter.
-      Provide the Slack JSON payload in the json-payload parameter.
+      Set the webhook URL in a custom environment variable configured on CircleCI, and provide the name of the environment variable in the webhook-url-env-var parameter.
+
+      To generate a webhook URL, please see the Slack instructions: https://api.slack.com/messaging/webhooks
       The payload can be generated with the Slack Block Kit Builder: https://app.slack.com/block-kit-builder
+
+      Unfortunately the json payload example below is reformatted by the CircleCI documentation generator. Please check the original in the Orb Source at the bottom of the page for an easier to read example.
     usage:
       version: 2.1
 

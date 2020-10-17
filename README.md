@@ -4,7 +4,7 @@
 
 ## Usage Examples
 
-See the usage examples on the orb's [CircleCI Orb Repository listing](https://circleci.com/developer/orbs/orb/adamu/slack-webhook).
+See the usage examples on the orb's [CircleCI Orb Repository listing](https://circleci.com/developer/orbs/orb/adamu/slack-webhook#usage-examples).
 
 ## Changelog
 
