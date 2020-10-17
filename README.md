@@ -29,7 +29,7 @@ The `json-payload` argument must always be provided.
 There are three ways to provide the webhook URL:
 1. Via the `SLACK_WEBHOOK` environment variable.
 2. Via a custom environment variable. Provide the name with the `webhook-url-env-var` parameter.
-3. Directly to the webhook with the `webhook-url` parameter.
+3. Directly to the `send-message` command with the `webhook-url` parameter.
 
 See the full examples on the orb's [CircleCI Orb Repository listing](https://circleci.com/developer/orbs/orb/adamu/slack-webhook#usage-examples).
 
