@@ -1,10 +1,9 @@
 version: 2.1
 
-description: |
-  A simple orb to send fully-customized Slack messages via Slack webhooks.
+description: A simple orb to send fully-customized Slack messages via Slack webhooks.
 
 display:
-  source_url: "https://github.com/adamu/slack-webhook-orb"
+  source_url: https://github.com/adamu/slack-webhook-orb
 
 commands:
   send-message:
